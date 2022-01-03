@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "rpr"
+version = "0.1.0"
+description = "Resource pack repository app and API"
+license = "Apache-2.0"
+authors = ["BD103 <dont@stalk.me>"]
+readme = "README.md"
+homepage = "https://mc-rpr.github.io"
+repository = "https://github.com/MC-RPR/App"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+black = "^21.12b0"
+isort = "^5.10.1"
+flake8 = "^4.0.1"
+
+[tool.black]
+line-length = 88
+target-version = ["py39"]
+extend-exclude = '''
+/(
+    | .venv
+)/
+'''
+
+[tool.isort]
+profile = "black"
+extend_skip = [".cache"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
