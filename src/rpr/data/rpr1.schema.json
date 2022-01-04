@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/MC-RPR/App/blob/main/src/rpr/data/rpr.schema.json",
+  "title": "RPR Metadata File",
+  "description": "Used to identify more specific properties than pack.mcmeta.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "description": "The version of the RPR file.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "credits": {
+      "description": "A list of people being credited for the resource pack.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the person or organization to be credited.",
+            "type": "string"
+          },
+          "description": {
+            "description": "A short sentence of what that person contributed.",
+            "type": "string"
+          },
+          "url": {
+            "description": "A working url that links to this person's website or project.",
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "required": ["name"]
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": ["version"]
+}
