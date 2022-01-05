@@ -13,6 +13,18 @@ tests = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)"
 tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "mypy", "pytest-mypy-plugins", "cloudpickle"]
 
 [[package]]
+name = "bd103"
+version = "2.0.0"
+description = "BD103's Python Package"
+category = "main"
+optional = false
+python-versions = ">=3.9,<4.0"
+
+[package.extras]
+docs = ["sphinx (>=4.3.1,<5.0.0)"]
+ext = ["trio (>=0.19.0,<0.20.0)"]
+
+[[package]]
 name = "black"
 version = "21.12b0"
 description = "The uncompromising code formatter."
@@ -179,12 +191,16 @@ python-versions = ">=3.6"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "16e1479f759f118601528f8db93b3b7a7af99b495bb49d083175abae0b92aae2"
+content-hash = "9bd12ac622ba7ccca91940fea0806205d189cea0d5359ef8c7c09250a6e43f45"
 
 [metadata.files]
 attrs = [
     {file = "attrs-21.4.0-py2.py3-none-any.whl", hash = "sha256:2d27e3784d7a565d36ab851fe94887c5eccd6a463168875832a1be79c82828b4"},
     {file = "attrs-21.4.0.tar.gz", hash = "sha256:626ba8234211db98e869df76230a137c4c40a12d72445c45d5f5b716f076e2fd"},
+]
+bd103 = [
+    {file = "BD103-2.0.0-py3-none-any.whl", hash = "sha256:8a1808ad7ef5c3bd352e25f3ebc037d9ca623f6e47c59df1e28c6a472bf80fde"},
+    {file = "BD103-2.0.0.tar.gz", hash = "sha256:96b14204d376c226848785b4a140c21262a2614da355ea825450cbb39c83d43e"},
 ]
 black = [
     {file = "black-21.12b0-py3-none-any.whl", hash = "sha256:a615e69ae185e08fdd73e4715e260e2479c861b5740057fde6e8b4e3b7dd589f"},
