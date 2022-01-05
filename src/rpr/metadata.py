@@ -1,5 +1,6 @@
 import json
 import pathlib
+import sys
 
 import jsonschema
 
@@ -7,12 +8,22 @@ _path = pathlib.Path(__file__).parent
 _cache = {}
 
 
-class RprMeta(object):
-    pass
+class RprMeta0(object):
+    _data: dict
+    version: int
+
+    def __init__(self, data: dict):
+        self._data = data
+        self.version = data["version"]
+
+    @property
+    def data(self) -> dict:
+        return self._data
 
 
-class RprMeta1(RprMeta):
-    pass
+class RprMeta1(RprMeta0):
+    def __init__(self, data: dict):
+        super().__init__(data)
 
 
 def get_schema(version: int, use_cache: bool = True) -> dict:
@@ -30,12 +41,13 @@ def get_schema(version: int, use_cache: bool = True) -> dict:
         res = json.load(fp)
 
     if use_cache and version not in _cache:
+        # Eventually store this in a pickle file?
         _cache[version] = res
 
     return res
 
 
-def get_meta(data: dict) -> RprMeta:
+def get_meta(data: dict) -> object:
     version = data.get("version")
 
     if version is None:
@@ -46,6 +58,20 @@ def get_meta(data: dict) -> RprMeta:
     try:
         schema = get_schema(version)
     except FileNotFoundError:
-        raise TypeError(f"No schema for data version {version}.")
+        raise ValueError(f"No schema for data version {version}.")
 
-    # Validate
+    # Possibly wrap in try/except
+    jsonschema.validate(instance=data, schema=schema)
+
+    cls = getattr(sys.modules[__name__], "RprMeta" + str(data["version"]), None)
+
+    if cls is None:
+        raise ValueError(
+            f"Given version of metadata {data['version']} is not supported"
+        )
+
+    return cls(data)
+
+
+if __name__ == "__main__":
+    print(get_meta({"version": 1}))

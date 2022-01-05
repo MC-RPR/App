@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mc-rpr.github.io/rpr0.schema.json",
+  "title": "RPR Metadata File",
+  "description": "Used to identify more specific properties than pack.mcmeta.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "description": "The version of the RPR file.",
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": ["version"]
+}
